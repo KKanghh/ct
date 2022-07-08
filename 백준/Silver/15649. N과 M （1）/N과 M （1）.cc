@@ -1,33 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
-vector<int> V;
-bool find(vector<int> V, int n) {
-	for (int i = 0; i < V.size(); i++) {
-		if (V[i] == n) return true;
-	}
-	return false;
+int arr[9];
+bool isused[9];
+int n, m;
 
-}
-void func(int n, int m) {
-	if (V.size() == m) {
-		for (auto e : V) cout << e << ' ';
+void func(int k) {
+	if (k == m) {
+		for (int i = 0; i < k; i++) cout << arr[i] << ' ';
 		cout << '\n';
-		return;
 	}
 	for (int i = 1; i <= n; i++) {
-		if (find(V,i)) continue;
-		V.push_back(i);
-		func(n, m);
-		V.pop_back();
+		if (!isused[i]) {
+			arr[k] = i;
+			isused[i] = true;
+			func(k + 1);
+			isused[i] = false;
+		}
 	}
 }
 
 int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-	
-	int N, M;
-	cin >> N >> M;
-	func(N, M);
-	
+	cin >> n >> m;
+	func(0);
 }
