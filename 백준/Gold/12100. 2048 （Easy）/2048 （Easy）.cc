@@ -8,11 +8,6 @@ void turn(int dir) {
 		for (int j = 0; j < N; j++) {
 			for (int i = 1; i < N; i++) {
 				if (board[i][j] == 0) continue;
-				/*if (board[i - 1][j] == board[i][j]) {
-					board[i - 1][j] *= 2;
-					board[i][j] = 0;
-				}*/
-				//else if (board[i - 1][j] == 0) {
 				int t = i - 1;
 				while (t >= 0 && board[t][j] == 0) t--;
 				if (t >= 0 && board[t][j] == board[i][j]) {
@@ -21,9 +16,6 @@ void turn(int dir) {
 					continue;
 				}
 				swap(board[++t][j], board[i][j]);
-				//board[i][j] = 0;
-					
-				//}
 			}
 		}
 	}
@@ -31,11 +23,6 @@ void turn(int dir) {
 		for (int i = 0; i < N; i++) {
 			for (int j = N - 2; j >= 0; j--) {
 				if (board[i][j] == 0) continue;
-				/*if (board[i - 1][j] == board[i][j]) {
-					board[i - 1][j] *= 2;
-					board[i][j] = 0;
-				}*/
-				//else if (board[i - 1][j] == 0) {
 				int t = j + 1;
 				while (t < N && board[i][t] == 0) t++;
 				if (t < N && board[i][t] == board[i][j]) {
@@ -44,9 +31,6 @@ void turn(int dir) {
 					continue;
 				}
 				swap(board[i][--t], board[i][j]);
-				//board[i][j] = 0;
-
-				//}
 			}
 		}
 	}
@@ -54,11 +38,6 @@ void turn(int dir) {
 		for (int j = 0; j < N; j++) {
 			for (int i = N - 2; i >= 0; i--) {
 				if (board[i][j] == 0) continue;
-				/*if (board[i - 1][j] == board[i][j]) {
-					board[i - 1][j] *= 2;
-					board[i][j] = 0;
-				}*/
-				//else if (board[i - 1][j] == 0) {
 				int t = i + 1;
 				while (t < N && board[t][j] == 0) t++;
 				if (t < N && board[t][j] == board[i][j]) {
@@ -67,9 +46,6 @@ void turn(int dir) {
 					continue;
 				}
 				swap(board[--t][j], board[i][j]);
-				//board[i][j] = 0;
-
-				//}
 			}
 		}
 	}
@@ -77,11 +53,6 @@ void turn(int dir) {
 		for (int i = 0; i < N; i++) {
 			for (int j = 1; j < N; j++) {
 				if (board[i][j] == 0) continue;
-				/*if (board[i - 1][j] == board[i][j]) {
-					board[i - 1][j] *= 2;
-					board[i][j] = 0;
-				}*/
-				//else if (board[i - 1][j] == 0) {
 				int t = j - 1;
 				while (t >= 0 && board[i][t] == 0) t--;
 				if (t >= 0 && board[i][t] == board[i][j]) {
@@ -90,9 +61,6 @@ void turn(int dir) {
 					continue;
 				}
 				swap(board[i][++t], board[i][j]);
-				//board[i][j] = 0;
-
-				//}
 			}
 		}
 	}
