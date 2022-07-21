@@ -73,22 +73,10 @@ int main() {
 		marble[1].X = blue_x;
 		marble[1].Y = blue_y;
 		int tmp = cases;
-		//cout << cases;
 		for (int k = 1; k <= 10; k++) {
 			sort(marble.begin(), marble.end());
 			int dir = tmp % 4;
 			tmp /= 4;
-			/*if (dir == 0) cout << "위";
-			else if (dir == 1) cout << "왼";
-			else if (dir == 2) cout << "아";
-			else cout << "오";
-			cout << '\n';
-			for (int i = 0; i < N; i++) {
-				for (int j = 0; j < M; j++) {
-					cout << game[i][j];
-				}
-				cout << '\n';
-			}*/
 
 			if (dir < 2) {
 				tilt(0, dir);
@@ -103,7 +91,6 @@ int main() {
 			}
 			if (red) {
 				mn = min(mn, k);
-				//cout << k << '\n';
 				break;
 				
 			}
