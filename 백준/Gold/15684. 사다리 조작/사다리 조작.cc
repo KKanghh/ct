@@ -31,7 +31,7 @@ int main() {
 				if (selected[k]) continue;
 				int x = k / (N - 1) + 1;
 				int y = k % (N - 1) + 1;
-				if (sdr_copy[x][y]) break;
+				if (sdr_copy[x][y] || sdr_copy[x][y - 1] || sdr_copy[x][y + 1]) break;
 				sdr_copy[x][y] = true;
 			}
 
