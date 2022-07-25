@@ -26,15 +26,6 @@ void spring() {
 	}
 }
 
-void summer() {
-	for (int x = 1; x <= N; x++) {
-		for (int y = 1; y <= N; y++) {
-			Y[x][y] += death[x][y] / 2;
-			death[x][y] = 0;
-		}
-	}
-}
-
 void fall() {
 	for (int x = 1; x <= N; x++) {
 		for (int y = 1; y <= N; y++) {
@@ -84,7 +75,6 @@ int main() {
 
 	while (K--) {
 		spring();
-		//summer();
 		fall();
 		winter();
 	}
