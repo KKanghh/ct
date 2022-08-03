@@ -1,22 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
-vector<int> V;
-
+int board[2000001], n;
 
 int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-	int n;
-	cin >> n;
 
+	cin >> n;
 	for (int i = 0; i < n; i++) {
 		int tmp;
 		cin >> tmp;
-		V.push_back(tmp);
+		board[tmp + 1000000]++;
 	}
-	sort(V.begin(), V.end());
-	for (int e: V) {
-		cout << e << '\n';
+
+	for (int i = 0; i < 2000001; i++) {
+		if (board[i] > 0) {
+			for (int j = 0; j < board[i]; j++) {
+				cout << i - 1000000 << '\n';
+			}
+		}
 	}
 
 }
