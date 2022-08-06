@@ -29,9 +29,6 @@ int main() {
 			mx_cnt = cnt;
 			mx_num = V[i];
 		}
-		else if (cnt == mx_cnt) {
-			mx_num = min(V[i - 1], mx_num);
-		}
 	}
 
 	cout << mx_num;
