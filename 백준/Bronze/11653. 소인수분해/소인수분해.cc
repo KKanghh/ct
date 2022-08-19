@@ -9,11 +9,13 @@ int main() {
 	cin >> n;
 
 	int k = 2;
-	while (k <= n) {
+	while (n >= k * k) {
 		while (n % k == 0) {
 			n /= k;
 			cout << k << '\n';
 		}
 		k++;
 	}
+
+	if (n != 1) cout << n;
 }
