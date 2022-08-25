@@ -1,29 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define X first
-#define Y second
 
-priority_queue<pair<double, int>> Q;
+int LAN[10000];
 int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-    int K, N;
-    cin >> K >> N;
-    for (int i = 0; i < K; i++) {
-        double temp;
-        cin >> temp;
-        Q.push({ temp, 1 });
-    }
+	int k, n;
+	cin >> k >> n;
+	for (int i = 0; i < k; i++) cin >> LAN[i];
 
+	long long st = 0, en = INT_MAX;
 
-    while (N--) {
-        double a;
-        int b;
-        a = Q.top().X;
-        b = Q.top().Y;
-        if (N == 0) cout << (int)(Q.top().X);
-        Q.pop();
-        Q.push({ a * b / (b + 1), b + 1 });
-    }
+	while (st < en) {
+		int mid = (st + en + 1) / 2;
+		int cnt = 0;
+		for (int i = 0; i < k; i++) cnt += (LAN[i] / mid);
+
+		if (cnt >= n) st = mid;
+		else en = mid - 1;
+	}
+
+	cout << st;
 }
