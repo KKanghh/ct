@@ -23,7 +23,7 @@ void pop() {
 	heap[sz--] = 0;
 	int tmp = 1;
 	while (true) {
-		if (tmp * 2 > 100005) break;
+		if (tmp * 2 > sz) break;
 		else if (heap[tmp * 2] == 0 && heap[tmp * 2 + 1] == 0) break;
 		else if (heap[tmp * 2 + 1] == 0) {
 			if (heap[tmp * 2] < heap[tmp]) {
