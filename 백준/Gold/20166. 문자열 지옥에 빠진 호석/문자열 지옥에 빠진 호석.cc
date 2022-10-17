@@ -32,7 +32,7 @@ int main() {
 		for (int x = 0; x < n; x++) {
 			for (int y = 0; y < m; y++) {
 				if (board[x][y] == sin[0]) {
-					Q.push({ x, y, 1 });
+					Q.push({ x, y, 0 });
 				}
 			}
 		}
@@ -41,10 +41,6 @@ int main() {
 			int x, y, t;
 			tie(x, y, t) = Q.top();
 			Q.pop();
-			if (t == len) {
-				cnt++;
-				continue;
-			}
 			for (int dir = 0; dir < 8; dir++) {
 				int nx = x + dx[dir];
 				int ny = y + dy[dir];
@@ -53,8 +49,11 @@ int main() {
 				if (ny < 0) ny += m;
 				if (ny >= m) ny -= m;
 
-				if (board[nx][ny] == sin[t]) {
-					Q.push({ nx, ny, t + 1 });
+				if (board[nx][ny] == sin[t + 1]) {
+					if (t + 1 == len - 1) cnt++;
+					else {
+						Q.push({ nx, ny, t + 1 });
+					}
 				}
 			}
 		}

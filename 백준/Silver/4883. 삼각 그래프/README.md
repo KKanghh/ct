@@ -12,7 +12,7 @@
 
 ### 문제 설명
 
-<p><img alt="" src="https://www.acmicpc.net/upload/images/trigraph.png" style="float:right; height:342px; width:261px">이 문제는 삼각 그래프의 가장 위쪽 가운데 정점에서 가장 아래쪽 가운데 정점으로 가는 최단 경로를 찾는 문제이다.</p>
+<p><img alt="" src="" style="float:right; height:342px; width:261px">이 문제는 삼각 그래프의 가장 위쪽 가운데 정점에서 가장 아래쪽 가운데 정점으로 가는 최단 경로를 찾는 문제이다.</p>
 
 <p>삼각 그래프는 사이클이 없는 그래프로 N ≥ 2 개의 행과 3열로 이루어져 있다. 삼각 그래프는 보통 그래프와 다르게 간선이 아닌 정점에 비용이 있다. 어떤 경로의 비용은 그 경로에서 지나간 정점의 비용의 합이다.</p>
 

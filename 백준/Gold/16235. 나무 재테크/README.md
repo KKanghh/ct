@@ -8,7 +8,7 @@
 
 ### 분류
 
-구현(implementation), 시뮬레이션(simulation)
+자료 구조(data_structures), 구현(implementation), 시뮬레이션(simulation)
 
 ### 문제 설명
 
