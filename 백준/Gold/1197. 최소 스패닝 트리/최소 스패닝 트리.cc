@@ -10,8 +10,7 @@ int find(int a) {
 
 void merge(int a, int b) {
 	a = find(a), b = find(b);
-	if (adj[a] > adj[b]) adj[b] = a;
-	else adj[a] = b;
+	adj[a] = b;
 }
 
 int main() {
