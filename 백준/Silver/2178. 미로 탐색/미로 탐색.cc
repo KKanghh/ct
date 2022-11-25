@@ -1,42 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define X first
-#define Y second
-
 int board[100][100];
-int vis[100][100];
+int dist[100][100];
+queue<pair<int, int>> Q;
+int dx[4] = { 0, 1, 0, -1 };
+int dy[4] = { 1, 0, -1, 0 };
 
 int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-	queue<pair<int, int>> Q;
-	int dx[4] = { 1, 0, -1, 0 };
-	int dy[4] = { 0, -1, 0, 1 };
-	int N, M;
-	cin >> N >> M;
-	string input;
-	for (int i = 0; i < N; i++) {
+
+	int n, m;
+	cin >> n >> m;
+
+	for (int i = 0; i < n; i++) {
+		string input;
 		cin >> input;
-		for (int j = 0; j < M; j++) {
+		for (int j = 0; j < m; j++) {
 			board[i][j] = input[j] - '0';
 		}
 	}
-	vis[0][0] = 1;
+
 	Q.push({ 0, 0 });
+	dist[0][0] = 1;
 
 	while (!Q.empty()) {
+		int x, y;
+		tie(x, y) = Q.front();
+		Q.pop();
 		for (int i = 0; i < 4; i++) {
-			int nx = Q.front().X + dx[i];
-			int ny = Q.front().Y + dy[i];
-
-			if (nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
-			if (board[nx][ny] == 0 || vis[nx][ny] > 0) continue;
-			vis[nx][ny] = vis[Q.front().X][Q.front().Y] + 1;
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+			if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
+			if (dist[nx][ny] > 0 || board[nx][ny] == 0) continue;
+			dist[nx][ny] = dist[x][y] + 1;
 			Q.push({ nx, ny });
 		}
-		Q.pop();
 	}
 
-	cout << vis[N - 1][M - 1];
-
+	cout << dist[n - 1][m - 1];
 }
