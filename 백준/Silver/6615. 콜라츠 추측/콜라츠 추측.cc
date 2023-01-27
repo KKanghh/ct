@@ -43,7 +43,7 @@ int main() {
 		}
 
 		cout << aa << " needs " << lenA - i << " steps, " << bb << " needs " << lenB - i << " steps, they meet at " << p << '\n';
-		A.erase(A.begin(), A.end());
-		B.erase(B.begin(), B.end());
+		A.clear();
+		B.clear();
 	}
 }
