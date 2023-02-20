@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-bool board[1001][1001];
+bool board[2][2];
 
 int main() {
 	ios::sync_with_stdio(0);
