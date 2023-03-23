@@ -52,6 +52,7 @@ void func(int x, int y) {
 				detach(x, y, size);
 				st += size * size;
 				sticker[size]--;
+
 			}
 			return;
 		}
@@ -61,7 +62,7 @@ void func(int x, int y) {
 			y = 0;
 		}
 	}
-
+	
 }
 
 int main() {
