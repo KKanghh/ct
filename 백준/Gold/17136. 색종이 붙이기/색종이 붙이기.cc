@@ -30,15 +30,7 @@ void detach(int x, int y, int size) {
 	}
 }
 
-pair<int, int> find_zero() {
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++) {
-			if (board[i][j]) return { i, j };
-		}
-	}
-}
-
-void func() {
+void func(int x, int y) {
 	if (st == 0) {
 		int a = 0;
 		for (int i = 1; i <= 5; i++) {
@@ -47,19 +39,29 @@ void func() {
 		mn = min(mn, a);
 		return;
 	}
-	int x, y;
-	tie(x, y) = find_zero();
-	for (int size = 5; size >= 1; size--) {
-		if (sticker[size] < 5 && check(x, y, size)) {
-			attach(x, y, size);
-			st -= size * size;
-			sticker[size]++;
-			func();
-			sticker[size]--;
-			detach(x, y, size);
-			st += size * size;
+	while (x < 10) {
+		if (board[x][y] == 1) {
+			for (int size = 5; size >= 1; size--) {
+				if (sticker[size] == 5) continue;
+				if (!check(x, y, size)) continue;
+
+				sticker[size]++;
+				st -= size * size;
+				attach(x, y, size);
+				func(x, y);
+				detach(x, y, size);
+				st += size * size;
+				sticker[size]--;
+			}
+			return;
+		}
+		y++;
+		if (y == 10) {
+			x++;
+			y = 0;
 		}
 	}
+
 }
 
 int main() {
@@ -73,7 +75,7 @@ int main() {
 		}
 	}
 
-	func();
+	func(0, 0);
 
 	if (mn == 0x3f3f3f3f) cout << -1;
 	else cout << mn;
