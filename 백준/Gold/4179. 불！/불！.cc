@@ -1,60 +1,76 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define X first
-#define Y second
+char board[1000][1000];
+queue<pair<int, int>> Q;
+int dx[4] = { 0, 1, 0, -1 };
+int dy[4] = { 1, 0, -1, 0 };
+int fire[1000][1000], jihun[1000][1000]; // 1000000
 
-char maze[1000][1000];
-int jd[1000][1000];
-int fd[1000][1000];
-queue<pair<int, int>> JQ;
-queue<pair<int, int>> FQ;
-int dx[4] = { 1, 0, -1, 0 };
-int dy[4] = { 0, -1, 0, 1 };
 int main() {
-	int N, M;
-	cin >> N >> M;
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j< M; j++) {
-			cin >> maze[i][j];
-			if (maze[i][j] == 'J') {
-				jd[i][j] = 1;
-				JQ.push({ i, j });
-			}
-			if (maze[i][j] == 'F') {
-				fd[i][j] = 1;
-				FQ.push({ i, j });
+	int r, c;
+	cin >> r >> c;
+
+	for (int i = 0; i < r; i++) {
+		string s;
+		cin >> s;
+		for (int j = 0; j < c; j++) {
+			board[i][j] = s[j];
+			if (board[i][j] == 'F') {
+				Q.push({ i, j });
+				fire[i][j] = 1;
 			}
 		}
 	}
 
-	while (!FQ.empty()) {
-		for (int i = 0; i < 4; i++) {
-			int nx = FQ.front().X + dx[i];
-			int ny = FQ.front().Y + dy[i];
-			if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
-			if (maze[nx][ny] == '#' || fd[nx][ny] > 0) continue;
-			fd[nx][ny] = fd[FQ.front().X][FQ.front().Y] + 1;
-			FQ.push({ nx, ny });
+	while (!Q.empty()) {
+		int x, y;
+		tie(x, y) = Q.front();
+		Q.pop();
+
+		for (int dir = 0; dir < 4; dir++) {
+			int nx = x + dx[dir];
+			int ny = y + dy[dir];
+			if (nx < 0 || nx >= r || ny < 0 || ny >= c) continue;
+			if (fire[nx][ny] > 0 || board[nx][ny] == '#') continue;
+
+			fire[nx][ny] = fire[x][y] + 1;
+			Q.push({ nx, ny });
 		}
-		FQ.pop();
 	}
 
-	while (!JQ.empty()) {
-		for (int i = 0; i < 4; i++) {
-			int nx = JQ.front().X + dx[i];
-			int ny = JQ.front().Y + dy[i];
-			if (nx < 0 || ny < 0 || nx >= N || ny >= M) {
-				cout << jd[JQ.front().X][JQ.front().Y];
+	for (int i = 0; i < r; i++) {
+		for (int j = 0; j < c; j++) {
+			if (board[i][j] == 'J') {
+				Q.push({ i, j });
+				jihun[i][j] = 1;
+			}
+		}
+	}
+
+	while (!Q.empty()) {
+		int x, y;
+		tie(x, y) = Q.front();
+		Q.pop();
+
+		for (int dir = 0; dir < 4; dir++) {
+			int nx = x + dx[dir];
+			int ny = y + dy[dir];
+
+			if (nx < 0 || nx >= r || ny < 0 || ny >= c) {
+				cout << jihun[x][y];
 				return 0;
 			}
-			if (maze[nx][ny] == '#' || jd[nx][ny] > 0 ||(fd[nx][ny] > 0 && fd[nx][ny] <= jd[JQ.front().X][JQ.front().Y] + 1)) continue;
-			jd[nx][ny] = jd[JQ.front().X][JQ.front().Y] + 1;
-			JQ.push({ nx, ny });
+			if (board[nx][ny] == '#' || (jihun[x][y] + 1) >= fire[nx][ny] && fire[nx][ny] > 0 || jihun[nx][ny] > 0) continue;
+
+			jihun[nx][ny] = jihun[x][y] + 1;
+			Q.push({ nx, ny });
 		}
-		JQ.pop();
 	}
 
-	cout << "IMPOSSIBLE";
+	
 
+	cout << "IMPOSSIBLE";
 }
