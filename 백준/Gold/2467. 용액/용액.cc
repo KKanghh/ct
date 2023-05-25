@@ -15,7 +15,7 @@ int main() {
 	int mx = INT_MAX;
 
 	for (int i = 0; i < n; i++) {
-		int p = lower_bound(num, num + n, -num[i]) - num;
+		int p = upper_bound(num, num + n, -num[i]) - num;
 		if (p < n && p != i && abs(num[i] + num[p]) < mx) {
 			mx = abs(num[i] + num[p]);
 			a = min(i, p);
