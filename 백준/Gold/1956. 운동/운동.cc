@@ -1,9 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 int dist[401][401];
-const int INF = 0x3f3f3f3f;
-vector<int> V;
 
 int main() {
 	ios::sync_with_stdio(0);
@@ -12,35 +9,30 @@ int main() {
 	int v, e;
 	cin >> v >> e;
 
-	for (int i = 1; i <= v; i++) {
-		fill(dist[i] + 1, dist[i] + v + 1, INF);
+	for (int i = 1; i <= v; i++) fill(dist[i] + 1, dist[i] + v + 1, 0x3f3f3f3f);
+
+	for (int i = 0; i < e; i++) {
+		int a, b, d;
+		cin >> a >> b >> d;
+		dist[a][b] = d;
 	}
 
-	while (e--) {
-		int a, b, c;
-		cin >> a >> b >> c;
-		dist[a][b] = c;
-	}
-
-	for (int i = 1; i <= v; i++) {
-		V.push_back(i);
-	}
 
 	for (int k = 1; k <= v; k++) {
 		for (int i = 1; i <= v; i++) {
 			for (int j = 1; j <= v; j++) {
-				if (dist[i][j] > dist[i][k] + dist[k][j]) dist[i][j] = dist[i][k] + dist[k][j];
+				dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
 			}
 		}
 	}
 
-
-	int mn = INF;
+	int mn = 0x3f3f3f3f;
 
 	for (int i = 1; i <= v; i++) {
-		mn = min(dist[i][i], mn);
+		mn = min(mn, dist[i][i]);
 	}
 
-	if (mn == INF) cout << -1;
+	if (mn == 0x3f3f3f3f) cout << -1;
 	else cout << mn;
+
 }
