@@ -8,7 +8,7 @@
 
 ### 분류
 
-자료 구조(data_structures), 그리디 알고리즘(greedy), 우선순위 큐(priority_queue), 정렬(sorting)
+자료 구조, 그리디 알고리즘, 우선순위 큐, 정렬
 
 ### 문제 설명
 

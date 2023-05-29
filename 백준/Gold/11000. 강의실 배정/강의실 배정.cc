@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
-pair<int, int> D[200000];
-priority_queue<int, vector<int>, greater<int>> Q;
+priority_queue<int, vector<int>, greater<int>> pq;
+int mx;
+pair<int, int> c[200000];
 
 int main() {
 	ios::sync_with_stdio(0);
@@ -9,23 +10,16 @@ int main() {
 
 	int n;
 	cin >> n;
-	
+
+	for (int i = 0; i < n; i++) cin >> c[i].first >> c[i].second;
+
+	sort(c, c + n);
+
 	for (int i = 0; i < n; i++) {
-		cin >> D[i].first >> D[i].second;
-	}
-	sort(D, D + n);
-	int mx = 1;
-	Q.push(D[0].second);
-	for (int i = 1; i < n; i++) {
-		if (D[i].first < Q.top()) {
-			Q.push(D[i].second);
-		}
-		else {
-			while (!Q.empty() && Q.top() <= D[i].first) Q.pop();
-			Q.push(D[i].second);
-		}
-		int k = Q.size();
-		mx = max(mx, k);
+		while (!pq.empty() && pq.top() <= c[i].first) pq.pop();
+		pq.push(c[i].second);
+		int s = pq.size();
+		mx = max(s, mx);
 	}
 
 	cout << mx;
