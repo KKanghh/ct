@@ -50,7 +50,6 @@ int main() {
 
 			if (ans.size() == i) continue;
 			if (ans.size() < i) cout << "IMPOSSIBLE\n";
-			if (ans.size() > i) cout << "?\n";
 			break;
 		}
 
