@@ -1,43 +1,48 @@
 #include <bits/stdc++.h>
-using namespace std;
-const int N = 12;
-int dp[N][1 << N];
-int a[N][N];
-const int MAX = (1 << 11) - 1;
-// 2^0 + 2^1 ... + 2^10
 
-int solve(int x, int bit)
+using namespace std;
+
+const int MAX = 12;
+int status[MAX][MAX], ans = 0;
+bool visited[MAX];
+
+void func(int cnt, int sum)
 {
-	if (x == 11)
-	{
-		if (bit == MAX) return 0;
-		else return -1e9;
-	}
-	int& ret = dp[x][bit];
-	if (ret != -1) return ret;
-	ret = -1e9;
-	for (int i = 0; i < 11; i++)
-	{
-		if (bit & (1 << i)) continue;
-		if (a[x][i] == 0) continue;
-		ret = max(ret, solve(x + 1, bit | (1 << i)) + a[x][i]);
-	}
+	if (cnt == MAX)
+		ans = max(ans, sum);
 	
-	return ret;
+	for (int i = 1; i < MAX; i++)
+	{
+		if (!visited[i] && status[cnt][i])
+		{
+			visited[i] = true;
+			sum += status[cnt][i];
+			func(cnt + 1, sum);
+			sum -= status[cnt][i];
+			visited[i] = false;
+		}
+	}
 }
 
-int main() {
-	ios::sync_with_stdio(0);
+int main(void)
+{
+	ios::sync_with_stdio(false);
 	cin.tie(0);
-	int t; cin >> t;
+	cout.tie(0);
+
+	int t;
+	cin >> t;
+
 	while (t--)
 	{
-		for (int i = 0; i < 11; i++)
-		{
-			for (int j = 0; j < 11; j++)
-				cin >> a[i][j];
-		}
-		memset(dp, -1, sizeof dp);
-		cout << solve(0, 0) << "\n";
+		for (int i = 1; i <= 11; i++)
+			for (int j = 1; j <= 11; j++)
+				cin >> status[i][j];
+
+		func(1, 0);
+		cout << ans << '\n';
+		ans = 0;
 	}
+
+	return 0;
 }
