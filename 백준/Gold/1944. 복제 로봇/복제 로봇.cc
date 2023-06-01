@@ -7,7 +7,7 @@ pair<int, int> S[251];
 int key;
 int num[50][50];
 
-priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> pq;
+priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
 bool vis[251];
 
@@ -94,12 +94,12 @@ int main() {
 
 	vis[0] = true;
 	for (int i = 1; i <= key; i++) {
-		pq.push({ adj[0][i], 0, i });
+		pq.push({ adj[0][i], i });
 	}
 
 	while (cnt < key) {
-		int a, b, d;
-		tie(d, a, b) = pq.top();
+		int b, d;
+		tie(d, b) = pq.top();
 		pq.pop();
 		if (vis[b]) continue;
 
@@ -107,7 +107,7 @@ int main() {
 		vis[b] = true;
 		len += d;
 		for (int i = 0; i <= key; i++) {
-            if (!vis[i]) pq.push({ adj[b][i], b ,i });
+            if (!vis[i]) pq.push({ adj[b][i], i });
         }
 
 	}
