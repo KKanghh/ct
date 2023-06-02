@@ -16,7 +16,13 @@ int main() {
             cin >> k;
             V.push_back(k);
         }
-        sort(V.begin(), V.end());
-        cout << V[0] << ' ' << V[V.size() - 1] << '\n';
+
+        int mn = 1e6, mx = -1e6;
+        for (int i = 0; i < V.size(); i++) {
+            mn = min(V[i], mn);
+            mx = max(V[i], mx);
+        }
+       
+        cout << mn << ' ' << mx << '\n';
     }
 }
