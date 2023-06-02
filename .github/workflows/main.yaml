@@ -10,9 +10,12 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: pwd
+      id: message
       shell: bash
       run: |
-        git log -1
+        echo "STEP_VALUE=$(git log --pretty=format:"%s" -1)" >> $GITHUB_OUTPUT
+        
+        echo ${{ steps.message.outputs.STEP_VALUE }}
     
     - name: Send a message to Discord
       shell: bash
@@ -21,5 +24,5 @@ jobs:
        curl -X POST https://discord.com/api/webhooks/1113745307314958367/RrSby1al_BTdeupYcC3TQj1mnTjvyMTLFnudRIjeyN45CBIMefr_3Fn_gJOHg2wuX4XH \
        -H 'Content-type: application/json' \
        -d '{
-          "content": "테스트"
+          "content": "${{ steps.message.outputs.STEP_VALUE }}"
         }'
