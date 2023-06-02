@@ -1,8 +1,6 @@
 name: 'Discord Alarm'
-on: 
-  schedule:
-    - cron: '0 * * * *'
-  push:
+on: push
+
 jobs:
   webhook:
     name: 'WEBHOOK'
@@ -14,7 +12,7 @@ jobs:
     - name: pwd
       shell: bash
       run: |
-        git log --name-only -1
+        git log -1
     
     - name: Send a message to Discord
       shell: bash
