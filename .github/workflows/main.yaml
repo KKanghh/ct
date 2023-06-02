@@ -1,0 +1,27 @@
+name: 'Discord Alarm'
+on: 
+  schedule:
+    - cron: '0 * * * *'
+  push:
+jobs:
+  webhook:
+    name: 'WEBHOOK'
+    runs-on: 'ubuntu-latest'
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: pwd
+      shell: bash
+      run: |
+        git log --name-only -1
+    
+    - name: Send a message to Discord
+      shell: bash
+    
+      run: |
+       curl -X POST https://discord.com/api/webhooks/1113745307314958367/RrSby1al_BTdeupYcC3TQj1mnTjvyMTLFnudRIjeyN45CBIMefr_3Fn_gJOHg2wuX4XH \
+       -H 'Content-type: application/json' \
+       -d '{
+          "content": "테스트"
+        }'
