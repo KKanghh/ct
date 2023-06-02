@@ -14,14 +14,12 @@ jobs:
       shell: bash
       run: |
         echo "STEP_VALUE=$(git log --pretty=format:"%s" -1)" >> $GITHUB_OUTPUT
-        
-        echo ${{ steps.message.outputs.STEP_VALUE }}
     
     - name: Send a message to Discord
       shell: bash
     
       run: |
-       curl -X POST https://discord.com/api/webhooks/1113745307314958367/RrSby1al_BTdeupYcC3TQj1mnTjvyMTLFnudRIjeyN45CBIMefr_3Fn_gJOHg2wuX4XH \
+       curl -X POST https://discord.com/api/webhooks/${{ secrets.WEBHOOK_ID }}/${{ secrets.WEBHOOK_TOKEN }} \
        -H 'Content-type: application/json' \
        -d '{
           "content": "${{ steps.message.outputs.STEP_VALUE }}"
