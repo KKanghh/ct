@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
-vector<int> adj[51], party[51];
-vector<int> truth;
 bool know[51];
+vector<int> party[50];
+vector<int> adj[51];
 queue<int> Q;
 
 int main() {
@@ -10,55 +10,40 @@ int main() {
 	cin.tie(0);
 
 	int n, m;
-
 	cin >> n >> m;
-	int trunum;
-	cin >> trunum;
-	while (trunum--) {
-		int k;
-		cin >> k;
-		truth.push_back(k);
+
+	int p;
+	cin >> p;
+	while (p--) {
+		int t;
+		cin >> t;
+		Q.push(t);
 	}
 
-	for (int i = 1; i <= m; i++) {
-		int k;
-		cin >> k;
-		k--;
-		int a, b;
-		cin >> a;
-		party[i].push_back(a);
-		while (k--) {
-			cin >> b;
-			party[i].push_back(b);
-			adj[a].push_back(b);
-			adj[b].push_back(a);
+	for (int i = 0; i < m; i++) {
+		int t;
+		cin >> t;
+		for (int j = 0; j < t; j++) {
+			int c;
+			cin >> c;
+			party[i].push_back(c);
+		}
+		for (int j = 0; j < t; j++) {
+			adj[party[i][j]].push_back(i);
 		}
 	}
 
-	for (int k : truth) {
-		know[k] = true;
-		Q.push(k);
+	while (!Q.empty()) {
+		int k = Q.front();
+		Q.pop();
 
-		while (!Q.empty()) {
-			int t = Q.front();
-			Q.pop();
-			for (int e : adj[t]) {
-				if (know[e]) continue;
-				know[e] = true;
-				Q.push(e);
-			}
+		for (int e : adj[k]) {
+			if (know[e]) continue;
+			know[e] = true;
+			m--;
+			for (int t : party[e]) Q.push(t);
 		}
 	}
-	
-	int cnt = 0;
-	for (int i = 1; i <= m; i++) {
-		cnt++;
-		for (int e : party[i]) {
-			if (know[e]) {
-				cnt--;
-				break;
-			}
-		}
-	}
-	cout << cnt;
+
+	cout << m;
 }
