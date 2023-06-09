@@ -5,28 +5,24 @@ int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
-	int num;
-	cin >> num;
-	string input;
-	while (num--) {
-		stack<char> S;
-		bool isVPS = true;
-		cin >> input;
-		for (char e : input) {
-			if (e == '(') {
-				S.push(e);
-			}
+	int n;
+	cin >> n;
+	while (n--) {
+		stack<int> S;
+		string s;
+		cin >> s;
+		for (int i = 0; i < s.size(); i++) {
+			if (s[i] == '(') S.push(1);
 			else {
 				if (S.empty()) {
-					isVPS = false;
+					S.push(1);
 					break;
 				}
-				S.pop();
+				else S.pop();
 			}
 		}
-
-		if (!S.empty()) isVPS = false;
-		if (isVPS) cout << "YES\n";
+		
+		if (S.empty()) cout << "YES\n";
 		else cout << "NO\n";
 	}
 }
